@@ -17,30 +17,35 @@ class _QrBarcodeScannerScreenState extends State<QrBarcodeScannerScreen> {
       onDetect: handleCode,
       controller: controller,
       overlayBuilder: (context, constraints) {
-        return SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
-              backButton(context),
-              Expanded(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: Container(
+                decoration: ShapeDecoration(
+                  shape: QrScannerOverlayShape(
+                      borderColor: Colors.white,
+                      borderRadius: 0,
+                      borderLength: 20,
+                      borderWidth: 5,
+                      cutOutWidth: MediaQuery.of(context).size.width - 40,
+                      cutOutHeight: 200),
+                ),
+              ),
+            ),
+            SafeArea(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
                 children: [
-                  Image.network(
-                    "https://i.sstatic.net/hcVhp.png",
-                    color: Colors.white,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  qrTextWidget()
+                  backButton(context),
+                  Spacer(),
+                  qrTextWidget(),
+                  barcodeButton(),
                 ],
-              )),
-              barcodeButton(),
-            ],
-          ),
-        ));
+              ),
+            )),
+          ],
+        );
       },
     ));
   }

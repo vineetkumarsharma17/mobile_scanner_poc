@@ -26,7 +26,7 @@ class ResultScreen extends StatelessWidget {
                   row("Format", barcode.format.name ?? ""),
                 ],
               ),
-            ))
+            )),
           ],
         ),
       ),
